@@ -9,6 +9,10 @@ DAEMONSET="linuxptp-daemon"
 TMP_RAW="/tmp/ptp_raw_events.txt"
 TMP_JSON="/tmp/ptp_cleaned_events.jsonl"
 
+# Clean up temp files if they exist
+[ -f "$TMP_RAW" ] && rm -f "$TMP_RAW"
+[ -f "$TMP_JSON" ] && rm -f "$TMP_JSON"
+
 echo "Extracting logs from $CONTAINER in $NAMESPACE..."
 oc logs ds/${DAEMONSET} -n ${NAMESPACE} -c ${CONTAINER} | \
   grep 'event sent' | \

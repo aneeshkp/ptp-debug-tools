@@ -1,0 +1,19 @@
+Run a RHEL 8 Toolbox on Fedora
+1. Pull a RHEL 8 UBI (Universal Base Image)
+
+You can use Red Hat’s UBI (freely redistributable RHEL user space image):
+podman pull registry.access.redhat.com/ubi8/ubi
+
+2. Create a custom toolbox container using RHEL 8 UBI
+toolbox create --container rhel8-toolbox --image registry.access.redhat.com/ubi8/ubi
+
+3. Install development tools (ssh)
+podman exec -it --user 0 rhel8-toolbox dnf install -y openssh-clients sudo
+
+4. Enter  the container 
+toolbox enter --container rhel8-toolbox
+
+5. Exit
+
+exit 
+
